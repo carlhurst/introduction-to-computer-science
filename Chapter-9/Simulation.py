@@ -11,13 +11,15 @@ def Intro():
 def Input():
 
     playerA = eval(input("Please input player A ability level based in a percentage form ( .0"))
+    playerB = eval(input("Please input player A ability level based in a percentage form ( .0"))
+
+    return playerA, playerB
 
 def simngames(n, probA, ProbB):
 
     for i in range(n):
         simgame()
-        if gameOver():
-            break
+
 
 
 def simgame(prob_a, prob_b):
@@ -31,27 +33,33 @@ def simgame(prob_a, prob_b):
         # Serv A
         if r.random() < prob_a and serv == 'A':
             score_a += 1
+            print("Serve A win")
         else:
             serv = 'B'
+            print("A Lost Serve")
         # Serv B
         if r.random() < prob_b and serv == 'B':
             score_b +=1
+            print("Serve B win")
         else:
             serv = "A"
+            print("B Lost Serve")
 
         if score_a == 15 or score_b ==15:
             break
 
 
+def GameOver():
+    print("End of Simulation")
 
 
-    # todo design the code to simulate the games
+def main():
+    Intro()
+
+    playA, playB = Input()
+
+    simgame(playA, playB)
 
 
-
-
-
-
-
-def gameOver():
-    # todo Design the code for the game over which should stop the game when a player reached 15 points
+if __name__ == '__main__':
+    main()
