@@ -1,4 +1,4 @@
-import random as R
+import random as r
 
 """
 This programme is designed to simulate a game of volly ball.
@@ -25,35 +25,59 @@ def GameTraditional(ability_a, ability_b):
 
     scoreB = 0
 
-    if (serv == 'A') and (R.random <= ability_a):
+    while True:
 
-        scoreA += 1
+        if (r.random() <= ability_a) and (serv == 'A'):
 
-    else:
-        serv = 'B'
+            scoreA += 1
 
-    if (serv == 'B') and (R.random <= ability_b):
+        else:
+            serv = 'B'
 
-        scoreB += 1
-    else:
-        serv = 'A'
+        if (r.random() <= ability_b) and (serv == 'B'):
 
-    if scoreA == 15:
+            scoreB += 1
+        else:
+            serv = 'A'
 
-        return 'A'
+        if scoreA == 15:
 
-    elif scoreB == 15:
+            return 'A'
 
-        return 'B'
+        elif scoreB == 15:
+
+            return 'B'
 
 
 
 def SimNGames(ability_a, ability_b, n):
+    Team_a_Score = 0
+
+    Team_b_Score = 0
+
+    for i in range(n):
+
+        a = GameTraditional(ability_a, ability_b)
+
+        print(i)
+
+        if a == 'A':
+            Team_a_Score += 1
+            # print("Team A Win")
+
+        elif a == 'B':
+            Team_b_Score += 1
+            # print("Team B Win")
+
+    return Team_a_Score, Team_b_Score
 
 
 def main():
-    print("hello")
+    Team_A, Team_B, Number_of_Games = Greeting()
 
+    Team_A_Score, Team_B_score = SimNGames(Team_A, Team_B, Number_of_Games)
+
+    print("Team A won {} Games\t Team B Scored {}".format(Team_A_Score, Team_B_score))
 
 if __name__ == '__main__':
     main()
