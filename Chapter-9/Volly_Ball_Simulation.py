@@ -49,6 +49,42 @@ def GameTraditional(ability_a, ability_b):
             return 'B'
 
 
+def GameNew(Ability_a, Ability_b):
+    scoreA = 0
+
+    scoreB = 0
+
+    Serv = 'A'
+
+    while True:
+
+        if Serv == 'A':
+
+            if r.random() <= Ability_a:
+
+                scoreA += 1
+
+            elif r.random() <= Ability_b:
+
+                scoreB += 1
+        Serv = 'B'
+
+        if Serv == 'B':
+
+            if r.random() <= Ability_b:
+
+                scoreA += 1
+
+            elif r.random() <= Ability_a:
+
+                scoreB += 1
+
+        if scoreA == 15:
+            return 'A'
+        elif scoreB == 15:
+            return 'B'
+
+
 
 def SimNGames(ability_a, ability_b, n):
     Team_a_Score = 0
