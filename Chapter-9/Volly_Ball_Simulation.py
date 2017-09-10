@@ -64,20 +64,24 @@ def GameNew(Ability_a, Ability_b):
 
                 scoreA += 1
 
+                Serv = 'B'
+
             elif r.random() <= Ability_b:
 
                 scoreB += 1
-        Serv = 'B'
+                Serv = 'B'
 
         if Serv == 'B':
 
             if r.random() <= Ability_b:
 
                 scoreA += 1
+                Serv = 'A'
 
             elif r.random() <= Ability_a:
 
                 scoreB += 1
+                Serv = 'A'
 
         if scoreA == 15:
             return 'A'
@@ -87,33 +91,51 @@ def GameNew(Ability_a, Ability_b):
 
 
 def SimNGames(ability_a, ability_b, n):
-    Team_a_Score = 0
+    Traditional_A_Team_Score = 0
 
-    Team_b_Score = 0
+    Traditional_B_Team_Score = 0
+
+    New_A_Team_Score = 0
+
+    New_B_Team_Score = 0
+
+
 
     for i in range(n):
 
         a = GameTraditional(ability_a, ability_b)
 
-        print(i)
+        # print(i)
 
         if a == 'A':
-            Team_a_Score += 1
+            Traditional_A_Team_Score += 1
             # print("Team A Win")
 
         elif a == 'B':
-            Team_b_Score += 1
+            Traditional_B_Team_Score += 1
             # print("Team B Win")
 
-    return Team_a_Score, Team_b_Score
+        b = GameNew(ability_a, ability_b)
+
+        # print(i)
+
+        if b == 'A':
+            New_A_Team_Score += 1
+
+        elif b == 'B':
+            New_B_Team_Score += 1
+
+    return Traditional_A_Team_Score, Traditional_B_Team_Score, New_A_Team_Score, New_B_Team_Score
 
 
 def main():
     Team_A, Team_B, Number_of_Games = Greeting()
 
-    Team_A_Score, Team_B_score = SimNGames(Team_A, Team_B, Number_of_Games)
+    Team_A_Score, Team_B_score, New_A_Score, New_B_Score = SimNGames(Team_A, Team_B, Number_of_Games)
 
-    print("Team A won {} Games\t Team B Scored {}".format(Team_A_Score, Team_B_score))
+    print("The Traditional style of match Team A Won \t {} \t Vs. \t Team B {}".format(Team_A_Score, Team_B_score))
+
+    print("\nThe new style of match Team A Won \t {} \t Vs. \t Team B {}".format(New_A_Score, New_B_Score))
 
 if __name__ == '__main__':
     main()
