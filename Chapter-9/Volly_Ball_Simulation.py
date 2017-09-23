@@ -4,7 +4,8 @@ import random as r
 This programme is designed to simulate a game of volly ball.
 """
 
-def Greeting():
+
+def greeting():
 
     print("This programme is designed to compare the different types of Volly ball")
 
