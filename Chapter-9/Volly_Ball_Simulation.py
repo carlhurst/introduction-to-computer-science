@@ -51,43 +51,40 @@ def game_traditional(ability_a, ability_b):
 
 
 def game_new(ability_a, ability_b):
-    scoreA = 0
+    score_team_a = 0
 
-    scoreB = 0
+    score_team_b = 0
 
-    Serv = 'A'
+    serv = 'A'
 
-    while True:
+    while score_team_a < 26 and score_team_b < 26:
 
         if serv == 'A':
+            while serv != 'B':
+                if r.random() <= ability_a:
+                    score_team_a += 1
+                    serv = 'B'
 
-            if r.random() <= ability_a:
-
-                scoreA += 1
-
-                serv = 'B'
-
-            elif r.random() <= ability_b:
-
-                scoreB += 1
-                serv = 'B'
+                elif r.random() <= ability_b:
+                    score_team_b += 1
+                    serv = 'B'
 
         if serv == 'B':
+            while serv != 'A':
+                if r.random() <= ability_b:
+                    score_team_b += 1
+                    serv = 'A'
 
-            if r.random() <= ability_b:
+                elif r.random() <= ability_a:
+                    score_team_a += 1
+                    serv = 'A'
 
-                scoreA += 1
-                serv = 'A'
-
-            elif r.random() <= ability_a:
-
-                scoreB += 1
-                serv = 'A'
-
-        if scoreA == 15:
-            return 'A'
-        elif scoreB == 15:
-            return 'B'
+                    # if score_team_a == 25:
+                    #     return 'A'
+                    #
+                    # elif score_team_b == 25:
+                    #     return 'B'
+    return score_team_a, score_team_b
 
 
 def sim_n_games(ability_a, ability_b, n):
@@ -111,12 +108,16 @@ def sim_n_games(ability_a, ability_b, n):
 
 
 def main():
-    team_a, team_b, number_of_games = greeting()
+    # team_a, team_b, number_of_games = greeting()
+    #
+    # team_a_score, team_b_score = sim_n_games(team_a, team_b, number_of_games)
+    #
+    # print("The Traditional style of match Team A Won {} ({:1}%) Vs. Team B {}".format(team_a_score, (team_a_score / (team_a_score + team_b_score)) * 100,  team_b_score))
 
-    team_a_score, team_b_score = sim_n_games(team_a, team_b, number_of_games)
+    for i in range(200):
+        a, b = game_new(.6, .5)
 
-    print("The Traditional style of match Team A Won {} ({:1}%) Vs. Team B {}".format(team_a_score, (team_a_score / (team_a_score + team_b_score)) * 100,  team_b_score))
-
+        print(a, b, i)
 
 if __name__ == '__main__':
 
