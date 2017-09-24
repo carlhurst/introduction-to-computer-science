@@ -51,41 +51,37 @@ def game_traditional(ability_a, ability_b):
 
 
 def game_new(ability_a, ability_b):
-    score_team_a = 0
-
-    score_team_b = 0
+    score_team_a, score_team_b = 0, 0
 
     serv = 'A'
 
-    while score_team_a < 26 and score_team_b < 26:
+    while True:
+
+        if score_team_a  25 or score_team_b != 25:
+            return score_team_a, score_team_b
+            break
 
         if serv == 'A':
-            while serv != 'B':
-                if r.random() <= ability_a:
+            while True:
+                if r.random() < ability_a:
                     score_team_a += 1
                     serv = 'B'
-
-                elif r.random() <= ability_b:
+                    break
+                elif r.random() < ability_b:
                     score_team_b += 1
                     serv = 'B'
+                    break
 
         if serv == 'B':
-            while serv != 'A':
-                if r.random() <= ability_b:
+            while True:
+                if r.random() < ability_b:
                     score_team_b += 1
                     serv = 'A'
-
-                elif r.random() <= ability_a:
+                    break
+                elif r.random() < ability_a:
                     score_team_a += 1
                     serv = 'A'
-
-                    # if score_team_a == 25:
-                    #     return 'A'
-                    #
-                    # elif score_team_b == 25:
-                    #     return 'B'
-    return score_team_a, score_team_b
-
+                    break
 
 def sim_n_games(ability_a, ability_b, n):
 
@@ -118,6 +114,7 @@ def main():
         a, b = game_new(.6, .5)
 
         print(a, b, i)
+
 
 if __name__ == '__main__':
 
