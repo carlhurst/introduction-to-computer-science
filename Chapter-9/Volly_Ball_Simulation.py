@@ -50,38 +50,45 @@ def game_traditional(ability_a, ability_b):
             return 'B'
 
 
+def rally(ability_a, ability_b, serv):
+    if serv == 'A':
+        while True:
+            if r.random() <= ability_a:
+                return 'B'
+            elif r.random() <= ability_b:
+                return 'A'
+    if serv == 'B':
+        while True:
+            if r.random() <= ability_b:
+                return 'A'
+            elif r.random() <= ability_a:
+                return 'B'
+
+
 def game_new(ability_a, ability_b):
+
     score_team_a, score_team_b = 0, 0
 
     serv = 'A'
 
     while True:
 
-        if score_team_a  25 or score_team_b != 25:
-            return score_team_a, score_team_b
-            break
+        a = rally(ability_a, ability_b, serv)
+
+        if a == 'B':
+            score_team_b += 1
+        elif a == 'A':
+            score_team_a += 1
 
         if serv == 'A':
-            while True:
-                if r.random() < ability_a:
-                    score_team_a += 1
-                    serv = 'B'
-                    break
-                elif r.random() < ability_b:
-                    score_team_b += 1
-                    serv = 'B'
-                    break
+            serv = 'B'
+        elif serv == 'B':
+            serv = 'A'
 
-        if serv == 'B':
-            while True:
-                if r.random() < ability_b:
-                    score_team_b += 1
-                    serv = 'A'
-                    break
-                elif r.random() < ability_a:
-                    score_team_a += 1
-                    serv = 'A'
-                    break
+        if score_team_a == 25:
+            return score_team_a, score_team_b
+        elif score_team_b == 25:
+            return score_team_a, score_team_b
 
 def sim_n_games(ability_a, ability_b, n):
 
@@ -111,7 +118,7 @@ def main():
     # print("The Traditional style of match Team A Won {} ({:1}%) Vs. Team B {}".format(team_a_score, (team_a_score / (team_a_score + team_b_score)) * 100,  team_b_score))
 
     for i in range(200):
-        a, b = game_new(.6, .5)
+        a, b = game_new(.5, .5)
 
         print(a, b, i)
 
