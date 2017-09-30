@@ -86,20 +86,21 @@ def game_new(ability_a, ability_b):
             serv = 'A'
 
         if score_team_a == 25:
-            return score_team_a, score_team_b
+            return 'A'
         elif score_team_b == 25:
-            return score_team_a, score_team_b
+            return 'B'
+
 
 def sim_n_games(ability_a, ability_b, n):
 
-    traditional_score_a = 0
+    traditional_score_a, traditional_score_b = 0, 0
 
-    traditional_score_b = 0
+    score_a, score_b = 0, 0
 
     for i in range(n):
         result = game_traditional(ability_a, ability_b)
 
-        print(i)
+        n_result = game_new(ability_a, ability_b)
 
         if result == 'A':
             traditional_score_a += 1
@@ -107,22 +108,23 @@ def sim_n_games(ability_a, ability_b, n):
         elif result == 'B':
             traditional_score_b += 1
 
-    return traditional_score_a, traditional_score_b
+        if n_result == 'A':
+            score_a += 1
+        elif n_result == 'B':
+            score_b += 1
+
+    return traditional_score_a, traditional_score_b, score_a, score_b
 
 
 def main():
-    # team_a, team_b, number_of_games = greeting()
-    #
-    # team_a_score, team_b_score = sim_n_games(team_a, team_b, number_of_games)
-    #
-    # print("The Traditional style of match Team A Won {} ({:1}%) Vs. Team B {}".format(team_a_score, (team_a_score / (team_a_score + team_b_score)) * 100,  team_b_score))
+    team_a, team_b, number_of_games = greeting()
 
-    for i in range(200):
-        a, b = game_new(.5, .5)
+    trad_a_score, trad_b_score, new_a_score, new_b_score = sim_n_games(team_a, team_b, number_of_games)
 
-        print(a, b, i)
+    print("Traditional A score is: {} \t Traditional B Score is: {}".format(trad_a_score, trad_b_score))
+    print("New A score is: {} \t New B score is: {}".format(new_a_score, new_b_score))
 
 
 if __name__ == '__main__':
-
     main()
+
