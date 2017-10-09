@@ -67,7 +67,8 @@ def rally(ability_a, ability_b, serv):
 
 def game_new(ability_a, ability_b):
 
-    score_team_a, score_team_b = 0, 0
+    score_team_a = 0
+    score_team_b = 0
 
     serv = 'A'
 
@@ -82,8 +83,9 @@ def game_new(ability_a, ability_b):
 
         if serv == 'A':
             serv = 'B'
-        elif serv == 'B':
-            serv = 'A'
+        elif: serv == 'A':
+            serv = ''
+
 
         if score_team_a == 25:
             return score_team_a, score_team_b
@@ -117,10 +119,9 @@ def main():
     #
     # print("The Traditional style of match Team A Won {} ({:1}%) Vs. Team B {}".format(team_a_score, (team_a_score / (team_a_score + team_b_score)) * 100,  team_b_score))
 
-    for i in range(200):
-        a, b = game_new(.5, .5)
-
-        print(a, b, i)
+    for i in range(1000):
+        a, b = game_new(.5, .3)
+        print("Team A Scored: {}  Teamed B Scored: {}".format(a, b, i))
 
 
 if __name__ == '__main__':
