@@ -70,4 +70,3 @@ def __init__(self, win, center, size):
             self.pip5.setFill(self.forground)
             self.pip6.setFill(self.forground)
             self.pip7.setFill(self.forground)
-            
