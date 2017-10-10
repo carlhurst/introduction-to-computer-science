@@ -66,9 +66,7 @@ def rally(ability_a, ability_b, serv):
 
 
 def game_new(ability_a, ability_b):
-
-    score_team_a = 0
-    score_team_b = 0
+    score_team_a, score_team_b = 0, 0
 
     serv = 'A'
 
@@ -83,9 +81,8 @@ def game_new(ability_a, ability_b):
 
         if serv == 'A':
             serv = 'B'
-        elif: serv == 'A':
-            serv = ''
-
+        elif serv == 'B':
+            serv = 'A'
 
         if score_team_a == 25:
             return 'A'
@@ -121,16 +118,10 @@ def sim_n_games(ability_a, ability_b, n):
 def main():
     team_a, team_b, number_of_games = greeting()
 
-<<<<<<< HEAD
-    for i in range(1000):
-        a, b = game_new(.5, .3)
-        print("Team A Scored: {}  Teamed B Scored: {}".format(a, b, i))
-=======
     trad_a_score, trad_b_score, new_a_score, new_b_score = sim_n_games(team_a, team_b, number_of_games)
 
     print("Traditional A score is: {} \t Traditional B Score is: {}".format(trad_a_score, trad_b_score))
     print("New A score is: {} \t New B score is: {}".format(new_a_score, new_b_score))
->>>>>>> ecc03bd0e62513f53713a34ed36009d955fcf173
 
 
 if __name__ == '__main__':

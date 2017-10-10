@@ -1,6 +1,6 @@
 from graphics import *
 class DieView:
-"""DieView is a widget that displays a graphical representation of a standard six-sided die."""
+    """DieView is a widget that displays a graphical representation of a standard six-sided die."""
 
 def __init__(self, win, center, size):
     # first define some standard values
