@@ -2,35 +2,45 @@ from graphics import *
 class DieView:
     """DieView is a widget that displays a graphical representation of a standard six-sided die."""
 
-def __init__(self, win, center, size):
-    # first define some standard values
-    self.win = win  # save this for drawing pips later
-    self.background = "white" # color of die face
-    self.forground = "black" # color of the pips
-    self.psize = 0.1 * size #radius of each pips
-    hsize = size / 2.0 # half the size of the die
-    offset = 0.6 * hsize # distance from center to outer pips
+    def __init__(self, win, center, size):
 
-    # create a square for the face
-    cx, cy = center.geyX(), center.getY()
-    p1 = Point(cx-hsize, cy-hsize)
-    p2 = Point(cx+hsize, cy+hsize)
-    rect = Rectangle(p1, p2)
-    rect.draw(win)
-    rect.setFill(self.background)
+        # first define some standard values
+        self.win = win  # save this for drawing pips later
+        self.background = "white" # color of die face
+        self.forground = "black" # color of the pips
+        self.psize = 0.1 * size #radius of each pips
+        hsize = size / 2.0 # half the size of the die
+        offset = 0.6 * hsize # distance from center to outer pips
 
-    # Draw a initail value
-    self.setValue(1)
+        # create a square for the face
+        cx, cy = center.getX(), center.getY()
+        p1 = Point(cx-hsize, cy-hsize)
+        p2 = Point(cx+hsize, cy+hsize)
+        rect = Rectangle(p1, p2)
+        rect.draw(win)
+        rect.setFill(self.background)
 
-    def __MakePip(self, x, y):
-        "Internal Helper MEthod to draw a pip at (x, y)"
+        # Create 7 Circles
+        self.pip1 = self.__makePip(cx - offset, cy-offset)
+        self.pip2 = self.__makePip(cx - offset, cy)
+        self.pip3 = self.__makePip(cx - offset, cy + offset)
+        self.pip4 = self.__makePip(cx, cy)
+        self.pip5 = self.__makePip(cx + offset, cy - offset)
+        self.pip6 = self.__makePip(cx - offset, cy)
+        self.pip7 = self.__makePip(cx + offset, cy + offset)
+
+        # Draw a initail value
+        self.setValue(1)
+
+    def __makePip(self, x, y):
+        "Internal Helper Method to draw a pip at (x, y)"
         pip = Circle(Point(x, y), self.psize)
         pip.setFill(self.background)
         pip.setOutline(self.background)
         pip.draw(self.win)
         return pip
 
-    def setValue(self, value):
+    def setValue (self, value):
         "Set the die to display value."
         # Turn all pips off
         self.pip1.setFill(self.background)
@@ -41,7 +51,7 @@ def __init__(self, win, center, size):
         self.pip6.setFill(self.background)
         self.pip7.setFill(self.background)
 
-    # Turn correct pips on
+        # Turn correct pips on
         if value == 1:
             self.pip4.setFill(self.forground)
         elif value == 2:
