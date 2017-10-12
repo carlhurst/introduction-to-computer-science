@@ -1,83 +1,128 @@
 import random as r
-"""The aim of this programme is to simulate games of racket ball and work out if a person of a given ability is loosing more than
-would be expected given the players ability
 
-A game consists of 15 points and each point can only me won when a player wins during his serve if he looses on his serve then serve passes to the other people."""
-
-def Intro():
-    print("This programme is designed to simulate racket ball games and determine whether the person is loosing " +
-          "more than expected given their level of ability.")
-
-def Input():
-    playerA = eval(input("Please input player A ability level based in a percentage form (.0): "))
-    playerB = eval(input("Please input player B ability level based in a percentage form (.0): "))
-    N = eval(input("How many games would you like to simulate: "))
-
-    return playerA, playerB, N
-
-def simngames(n, probA, ProbB):
-    # Scores counter for the for loop
-
-    A_Score = 0
-
-    B_Score = 0
-
-    # for loop for the amount of games which is to be run
-    for i in range(n):
-        Winner = simgame(probA, ProbB)
-        print("Cycle: " + str(i))
-        if Winner == 'A':
-            A_Score += 1
-        else:
-            B_Score += 1
-
-    return A_Score, B_Score
+"""
+This programme is designed to simulate a game of volly ball.
+"""
 
 
+def greeting():
 
-def simgame(prob_a, prob_b):
+    print("This programme is designed to compare the different types of Volly ball")
+
+    team_a = eval(input("\n Please input the level of ability of both the teams in the following format (0.1): "))
+
+    team_b = eval(input("\n Please input the level of ability of both the teams in the following format (0.1): "))
+
+    number_of_games = eval(input("\n Please enter the number of the amount of games you wish to simulate."))
+
+    return team_a, team_b,  number_of_games
+
+
+def game_traditional(ability_a, ability_b):
+
     serv = 'A'
 
     score_a = 0
+
     score_b = 0
 
-    while (True):
-        # Serv A
-        if r.random() < prob_a and serv == 'A':
+    while True:
+
+        if (r.random() <= ability_a) and (serv == 'A'):
+
             score_a += 1
-            # print("Serve A win")
+
         else:
             serv = 'B'
-            # print("A Lost Serve")
-        # Serv B
-        if r.random() < prob_b and serv == 'B':
-            score_b +=1
-            # print("Serve B win")
+
+        if (r.random() <= ability_b) and (serv == 'B'):
+
+            score_b += 1
         else:
-            serv = "A"
-            # print("B Lost Serve")
+            serv = 'A'
 
-        if score_a == 15 or score_b ==15:
-            if score_a == 15:
-                return 'A'
-            else:
+        if score_a == 15:
+
+            return 'A'
+
+        elif score_b == 15:
+
+            return 'B'
+
+
+def rally(ability_a, ability_b, serv):
+    if serv == 'A':
+        while True:
+            if r.random() <= ability_a:
                 return 'B'
-            break
+            elif r.random() <= ability_b:
+                return 'A'
+    if serv == 'B':
+        while True:
+            if r.random() <= ability_b:
+                return 'A'
+            elif r.random() <= ability_a:
+                return 'B'
 
 
-def GameOver():
-    print("End of Simulation")
+def game_new(ability_a, ability_b):
+
+    score_team_a, score_team_b = 0, 0
+
+    serv = 'A'
+
+    while True:
+
+        a = rally(ability_a, ability_b, serv)
+
+        if a == 'B':
+            score_team_b += 1
+        elif a == 'A':
+            score_team_a += 1
+
+        if serv == 'A':
+            serv = 'B'
+        elif serv == 'B':
+            serv = 'A'
+
+        if score_team_a == 25:
+            return 'A'
+        elif score_team_b == 25:
+            return 'B'
+
+
+def sim_n_games(ability_a, ability_b, n):
+
+    traditional_score_a, traditional_score_b = 0, 0
+
+    score_a, score_b = 0, 0
+
+    for i in range(n):
+        result = game_traditional(ability_a, ability_b)
+
+        n_result = game_new(ability_a, ability_b)
+
+        if result == 'A':
+            traditional_score_a += 1
+
+        elif result == 'B':
+            traditional_score_b += 1
+
+        if n_result == 'A':
+            score_a += 1
+        elif n_result == 'B':
+            score_b += 1
+
+    return traditional_score_a, traditional_score_b, score_a, score_b
 
 
 def main():
-    Intro()
+    team_a, team_b, number_of_games = greeting()
 
-    playA, playB, N = Input()
+    trad_a_score, trad_b_score, new_a_score, new_b_score = sim_n_games(team_a, team_b, number_of_games)
 
-    A, B = simngames(N, playA, playB)
-
-    print(A)
-    print(B)
+    print("Traditional A score is: {} \t Traditional B Score is: {}".format(trad_a_score, trad_b_score))
+    print("New A score is: {} \t New B score is: {}".format(new_a_score, new_b_score))
 
 
 if __name__ == '__main__':
