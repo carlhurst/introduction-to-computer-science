@@ -23,13 +23,13 @@ class Button:
         self.label.draw(win)
         self.deactivate()
 
-    def clicked(self):
+    def clicked(self, p):
         "Returns True if button is active and p is inside"
         return (self.active and
                 self.xmin <= p.getX() <= self.xmax and
                 self.ymin <= p.getY() <= self.ymax)
 
-    def active(self):
+    def activation(self):
         "Sets this button to active"
         self.label.setFill('black')
         self.rect.setWidth(2)

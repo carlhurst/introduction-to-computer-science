@@ -5,12 +5,12 @@ class DieView:
     def __init__(self, win, center, size):
 
         # first define some standard values
-        self.win = win  # save this for drawing pips later
-        self.background = "white" # color of die face
-        self.forground = "black" # color of the pips
-        self.psize = 0.1 * size #radius of each pips
-        hsize = size / 2.0 # half the size of the die
-        offset = 0.6 * hsize # distance from center to outer pips
+        self.win = win              # save this for drawing pips later
+        self.background = "white"   # color of die face
+        self.foreground = "black"    # color of the pips
+        self.psize = 0.1 * size     # radius of each pips
+        hsize = size / 2.0          # half the size of the die
+        offset = 0.6 * hsize        # distance from center to outer pips
 
         # create a square for the face
         cx, cy = center.getX(), center.getY()
@@ -26,7 +26,7 @@ class DieView:
         self.pip3 = self.__makePip(cx - offset, cy + offset)
         self.pip4 = self.__makePip(cx, cy)
         self.pip5 = self.__makePip(cx + offset, cy - offset)
-        self.pip6 = self.__makePip(cx - offset, cy)
+        self.pip6 = self.__makePip(cx + offset, cy)
         self.pip7 = self.__makePip(cx + offset, cy + offset)
 
         # Draw a initail value
@@ -53,30 +53,29 @@ class DieView:
 
         # Turn correct pips on
         if value == 1:
-            self.pip4.setFill(self.forground)
+            self.pip4.setFill(self.foreground)
         elif value == 2:
-            self.pip1.setFill(self.forground)
-            self.pip7.setFill(self.forground)
+            self.pip1.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
         elif value == 3:
-            self.pip1.setFill(self.forground)
-            self.pip7.setFill(self.forground)
-            self.pip4.setFill(self.forground)
+            self.pip1.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
+            self.pip4.setFill(self.foreground)
         elif value == 4:
-            self.pip1.setFill(self.forground)
-            self.pip3.setFill(self.forground)
-            self.pip5.setFill(self.forground)
-            self.pip7.setFill(self.forground)
+            self.pip1.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
         elif value == 5:
-            self.pip1.setFill(self.forground)
-            self.pip3.setFill(self.forground)
-            self.pip4.setFill(self.forground)
-            self.pip5.setFill(self.forground)
-            self.pip7.setFill(self.forground)
+            self.pip1.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip4.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
         else:
-            self.pip1.setFill(self.forground)
-            self.pip2.setFill(self.forground)
-            self.pip3.setFill(self.forground)
-            self.pip4.setFill(self.forground)
-            self.pip5.setFill(self.forground)
-            self.pip6.setFill(self.forground)
-            self.pip7.setFill(self.forground)
+            self.pip1.setFill(self.foreground)
+            self.pip2.setFill(self.foreground)
+            self.pip3.setFill(self.foreground)
+            self.pip5.setFill(self.foreground)
+            self.pip6.setFill(self.foreground)
+            self.pip7.setFill(self.foreground)
